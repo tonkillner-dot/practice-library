@@ -1,0 +1,14 @@
+<!-- Story 2: The Secret Bakery - Chapter 4: A Little Magic -->
+<!-- Prompt: A small blue bird wearing a tiny white baker hat, magical sparkles flying around it inside a bakery. -->
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#fdf4ff"/>
+    <circle cx="100" cy="110" r="45" fill="#60a5fa"/>
+    <path d="M140 100l25-10v20z" fill="#3b82f6"/>
+    <path d="M100 110l-40 20 10-30z" fill="#2563eb"/>
+    <rect x="85" y="55" width="30" height="25" rx="5" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+    <circle cx="120" cy="100" r="4" fill="#0f172a"/>
+    <path d="M130 110l15 10" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="60" cy="60" r="2" fill="#d8b4fe"/>
+    <circle cx="160" cy="70" r="3" fill="#d8b4fe"/>
+    <circle cx="140" cy="150" r="2" fill="#d8b4fe"/>
+</svg>

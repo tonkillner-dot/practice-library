@@ -1,0 +1,10 @@
+<!-- Story 3: Magic Park - Chapter 3: A Blue Heart -->
+<!-- Prompt: A clear blue sky with a single fluffy white cloud in the shape of a heart, bright sun in the corner. -->
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#eff6ff"/>
+    <circle cx="30" cy="30" r="40" fill="#fde047" opacity="0.4"/>
+    <circle cx="30" cy="30" r="20" fill="#facc15"/>
+    <path d="M100 140 c-40-30-40-70 0-90 40 20 40 60 0 90z" fill="#fff" opacity="0.9"/>
+    <circle cx="85" cy="80" r="25" fill="#fff"/>
+    <circle cx="115" cy="80" r="25" fill="#fff"/>
+</svg>

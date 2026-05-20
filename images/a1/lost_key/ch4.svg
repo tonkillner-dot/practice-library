@@ -1,0 +1,14 @@
+<!-- Story 1: The Lost Key - Chapter 4: The Gold Key -->
+<!-- Prompt: A shining small golden key found under a grey stone, sparkles around it, green grass context. -->
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#fff7ed"/>
+    <path d="M40 140q60-20 120 0" stroke="#16a34a" stroke-width="4" fill="none"/>
+    <path d="M50 130q30-40 80 0z" fill="#94a3b8"/>
+    <g transform="translate(100, 120) rotate(-30)">
+        <circle cx="40" cy="0" r="12" fill="none" stroke="#fbbf24" stroke-width="5"/>
+        <rect x="0" y="-3" width="30" height="6" fill="#fbbf24"/>
+        <rect x="5" y="3" width="4" height="8" fill="#fbbf24"/>
+        <rect x="15" y="3" width="4" height="8" fill="#fbbf24"/>
+    </g>
+    <path d="M140 100l3 3m10-5l2 2m-20-15l2 2" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+</svg>

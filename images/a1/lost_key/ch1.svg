@@ -1,0 +1,10 @@
+<!-- Story 1: The Lost Key - Chapter 1: The Small Box -->
+<!-- Prompt: A mysterious small wooden box with an ornate gold lock, sitting on a simple wooden table, soft indoor light. -->
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#f8fafc"/>
+    <rect x="40" y="140" width="120" height="10" fill="#cbd5e1"/>
+    <rect x="55" y="80" width="90" height="70" rx="4" fill="#78350f"/>
+    <path d="M55 80h90v15H55z" fill="#92400e"/>
+    <circle cx="100" cy="115" r="10" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+    <rect x="98" y="115" width="4" height="12" fill="#d97706"/>
+</svg>
