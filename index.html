@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Library - Elevate Your English</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #030712;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.05);
+        }
+        body { 
+            font-family: 'Outfit', 'Sarabun', sans-serif; 
+            background-color: var(--bg-color); 
+            color: #f8fafc;
+            overflow-x: hidden;
+            margin: 0;
+            cursor: default;
+        }
+
+        /* --- Dynamic Glow Background --- */
+        #glow-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -3;
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #030712 100%);
+        }
+        #mouse-glow {
+            position: fixed;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: -2;
+            transition: top 0.1s ease-out, left 0.1s ease-out;
+        }
+
+        /* --- Floating 3D Shapes --- */
+        .shape {
+            position: absolute;
+            filter: blur(4px);
+            z-index: -1;
+            animation: floatShape 20s infinite linear;
+        }
+        .shape-1 { width: 300px; height: 300px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; background: linear-gradient(45deg, #6366f133, #ec489933); top: 10%; left: 10%; }
+        .shape-2 { width: 400px; height: 400px; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; background: linear-gradient(45deg, #3b82f633, #10b98133); bottom: 10%; right: 5%; animation-direction: reverse; }
+        @keyframes floatShape {
+            0% { transform: rotate(0deg) translate(0, 0) scale(1); }
+            33% { transform: rotate(120deg) translate(50px, -50px) scale(1.1); }
+            66% { transform: rotate(240deg) translate(-50px, 50px) scale(0.9); }
+            100% { transform: rotate(360deg) translate(0, 0) scale(1); }
+        }
+
+        /* --- Glassmorphism & 3D Cards --- */
+        .glass-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: border-color 0.3s ease;
+        }
+        .tilt-card-inner {
+            transform: translateZ(40px); /* Makes content pop out */
+        }
+        .tilt-card:hover {
+            border-color: var(--level-color);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        /* Level Colors */
+        .color-a1 { --level-color: #818cf8; text-shadow: 0 0 20px rgba(129, 140, 248, 0.5); }
+        .color-a2 { --level-color: #60a5fa; text-shadow: 0 0 20px rgba(96, 165, 250, 0.5); }
+        .color-b1 { --level-color: #34d399; text-shadow: 0 0 20px rgba(52, 211, 153, 0.5); }
+        .color-b2 { --level-color: #fbbf24; text-shadow: 0 0 20px rgba(251, 191, 36, 0.5); }
+        .color-c1 { --level-color: #f97316; text-shadow: 0 0 20px rgba(249, 115, 22, 0.5); }
+        .color-c2 { --level-color: #e11d48; text-shadow: 0 0 20px rgba(225, 29, 72, 0.5); }
+
+        /* --- Typography & Utilities --- */
+        .gradient-text {
+            background: linear-gradient(to right, #818cf8, #c084fc, #f472b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .typewriter::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Modern Button */
+        .btn-modern {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-modern::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-modern:hover::before { left: 100%; }
+
+        /* Scroll indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-15px) translateX(-50%); }
+            60% { transform: translateY(-7px) translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Background Elements -->
+    <div id="glow-bg"></div>
+    <div id="mouse-glow"></div>
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+
+    <div class="max-w-7xl mx-auto px-6 py-12 relative z-10">
+        
+        <!-- Hero Section -->
+        <header class="min-h-screen flex flex-col items-center justify-center text-center relative -mt-12">
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-sm font-bold tracking-widest mb-8 backdrop-blur-md">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+                </span>
+                CEFR ALIGNED LEARNING
+            </div>
+            
+            <h1 class="text-7xl md:text-[8rem] font-black mb-4 tracking-tighter leading-none">
+                Practice <br><span class="gradient-text">Library</span>
+            </h1>
+            
+            <p class="text-2xl md:text-3xl text-slate-300 font-light mb-8 h-10" id="typewriter-text"></p>
+            
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+                ก้าวข้ามขีดจำกัดของตัวเองผ่านคลังเรื่องเล่าภาษาอังกฤษ 6 ระดับ (A1-C2) พร้อมพจนานุกรมอัจฉริยะที่ทำให้ทุกการอ่านคือการพัฒนา
+            </p>
+            
+            <button onclick="document.getElementById('levels').scrollIntoView({behavior: 'smooth'})" class="btn-modern px-10 py-5 bg-white text-slate-900 rounded-full font-black text-lg hover:scale-105 transition-transform shadow-[0_0_40px_rgba(255,255,255,0.3)]">
+                BEGIN YOUR JOURNEY
+            </button>
+
+            <!-- Scroll Indicator -->
+            <div class="scroll-down text-slate-500 opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+            </div>
+        </header>
+
+        <!-- Levels Section -->
+        <div id="levels" class="pt-20 pb-32">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black mb-4">Choose Your Stage</h2>
+                <div class="h-1 w-20 bg-indigo-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-container">
+                <!-- A1 -->
+                <div onclick="selectLevel('A1')" class="tilt-card glass-panel rounded-[2rem] p-10 text-center cursor-pointer">
+                    <div class="tilt-card-inner">
+                        <div class="text-7xl font-black color-a1 mb-2">A1</div>
+                        <h3 class="text-xl font-bold uppercase tracking-[0.2em] mb-4 text-white">Beginner</h3>
+                        <p class="text-slate-400 text-sm mb-8 leading-relaxed">ปูพื้นฐานความมั่นใจด้วยเรื่องสั้นในชีวิตประจำวัน</p>
+                        <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-400/30 text-indigo-400 text-[10px] font-black tracking-widest uppercase">10 Stories</div>
+                    </div>
+                </div>
+
+                <!-- A2 -->
+                <div onclick="selectLevel('A2')" class="tilt-card glass-panel rounded-[2rem] p-10 text-center cursor-pointer">
+                    <div class="tilt-card-inner">
+                        <div class="text-7xl font-black color-a2 mb-2">A2</div>
+                        <h3 class="text-xl font-bold uppercase tracking-[0.2em] mb-4 text-white">Elementary</h3>
+                        <p class="text-slate-400 text-sm mb-8 leading-relaxed">ผจญภัยไปกับเรื่องเล่าและประโยคที่ซับซ้อนขึ้น</p>
+                        <div class="inline-block px-4 py-1.5 rounded-full border border-blue-400/30 text-blue-400 text-[10px] font-black tracking-widest uppercase">15 Stories</div>
+                    </div>
+                </div>
+
+                <!-- B1 -->
+                <div onclick="selectLevel('B1')" class="tilt-card glass-panel rounded-[2rem] p-10 text-center cursor-pointer">
+                    <div class="tilt-card-inner">
+                        <div class="text-7xl font-black color-b1 mb-2">B1</div>
+                        <h3 class="text-xl font-bold uppercase tracking-[0.2em] mb-4 text-white">Intermediate</h3>
+                        <p class="text-slate-400 text-sm mb-8 leading-relaxed">ขยายมุมมองผ่านประเด็นสังคมและอนาคต</p>
+                        <div class="inline-block px-4 py-1.5 rounded-full border border-emerald-400/30 text-emerald-400 text-[10px] font-black tracking-widest uppercase">10 Stories</div>
+                    </div>
+                </div>
+
+                <!-- B2 -->
+                <div onclick="selectLevel('B2')" class="tilt-card glass-panel rounded-[2rem] p-10 text-center cursor-pointer">
+                    <div class="tilt-card-inner">
+                        <div class="text-7xl font-black color-b2 mb-2">B2</div>
+                        <h3 class="text-xl font-bold uppercase tracking-[0.2em] mb-4 text-white">Upper-Int</h3>
+                        <p class="text-slate-400 text-sm mb-8 leading-relaxed">เจาะลึกเนื้อหาเชิงวิเคราะห์และเรื่องราวมหากาพย์</p>
+                        <div class="inline-block px-4 py-1.5 rounded-full border border-amber-400/30 text-amber-400 text-[10px] font-black tracking-widest uppercase">10 Stories</div>
+                    </div>
+                </div>
+
+                <!-- C1 -->
+                <div onclick="selectLevel('C1')" class="tilt-card glass-panel rounded-[2rem] p-10 text-center cursor-pointer">
+                    <div class="tilt-card-inner">
+                        <div class="text-7xl font-black color-c1 mb-2">C1</div>
+                        <h3 class="text-xl font-bold uppercase tracking-[0.2em] mb-4 text-white">Advanced</h3>
+                        <p class="text-slate-400 text-sm mb-8 leading-relaxed">ดำดิ่งสู่วรรณกรรมและแนวคิดเชิงวิชาการ</p>
+                        <div class="inline-block px-4 py-1.5 rounded-full border border-orange-400/30 text-orange-400 text-[10px] font-black tracking-widest uppercase">5 Stories</div>
+                    </div>
+                </div>
+
+                <!-- C2 -->
+                <div onclick="selectLevel('C2')" class="tilt-card glass-panel rounded-[2rem] p-10 text-center cursor-pointer">
+                    <div class="tilt-card-inner">
+                        <div class="text-7xl font-black color-c2 mb-2">C2</div>
+                        <h3 class="text-xl font-bold uppercase tracking-[0.2em] mb-4 text-white">Mastery</h3>
+                        <p class="text-slate-400 text-sm mb-8 leading-relaxed">ที่สุดแห่งความเชี่ยวชาญระดับปรัชญาสูงสุด</p>
+                        <div class="inline-block px-4 py-1.5 rounded-full border border-rose-400/30 text-rose-400 text-[10px] font-black tracking-widest uppercase">5 Stories</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Creator Credit -->
+        <footer class="pb-20 max-w-4xl mx-auto">
+            <div class="glass-panel rounded-[2rem] overflow-hidden relative group">
+                <!-- Hover Glow Effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div class="relative z-10 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 justify-between">
+                    
+                    <!-- Avatar / Initial -->
+                    <div class="hidden md:flex w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 items-center justify-center text-3xl font-black text-white shadow-xl shadow-indigo-500/30">
+                        NU
+                    </div>
+
+                    <!-- Details -->
+                    <div class="text-center md:text-left flex-1">
+                        <div class="text-indigo-400 text-[10px] font-black tracking-[0.3em] uppercase mb-2">Architect & Developer</div>
+                        <h4 class="text-2xl md:text-3xl font-black text-white mb-1">นภรัฐ อุดเต็น</h4>
+                        <p class="text-slate-400 text-sm mb-4">Mr. Napharat Udten</p>
+                        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs text-slate-300">
+                            <span class="px-3 py-1 bg-white/5 rounded-md border border-white/10">คณิตศาสตร์</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-md border border-white/10">โรงเรียนบ้านส้อเด่นพัฒนา จ.น่าน</span>
+                        </div>
+                    </div>
+
+                    <!-- Action -->
+                    <div class="text-center md:text-right">
+                        <a href="mailto:n.udten@gmail.com" class="group/btn relative inline-flex items-center justify-center px-8 py-3 bg-white/10 hover:bg-white text-white hover:text-slate-900 border border-white/20 rounded-full font-bold transition-all duration-300 overflow-hidden">
+                            <span class="relative z-10 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                CONTACT
+                            </span>
+                        </a>
+                        <p class="mt-4 text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">Premium AI System &copy; 2024</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Mouse Glow Effect
+        const glow = document.getElementById('mouse-glow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // 3D Tilt Effect for Cards
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // Typewriter Effect
+        const text = "หอสมุดฝึกอ่านเพื่อการพัฒนาตนเอง";
+        const typingElement = document.getElementById('typewriter-text');
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                typingElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                typingElement.classList.add('typewriter');
+            }
+        }
+        // Start typing after a short delay
+        setTimeout(typeWriter, 500);
+
+        // Navigation
+        function selectLevel(level) {
+            localStorage.setItem('selectedLevel', level);
+            window.location.href = 'library.html';
+        }
+    </script>
+</body>
+</html>

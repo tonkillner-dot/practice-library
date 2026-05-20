@@ -1,0 +1,59 @@
+{
+  "title": "The Lost Key",
+  "level": "A1",
+  "cover_url": "G:\\My Drive\\AI\\lang\\images\\cover.png",
+  "vocabulary": [
+    { "word": "Key", "translation": "กุญแจ" },
+    { "word": "Lost", "translation": "หาย" },
+    { "word": "Find", "translation": "หา" },
+    { "word": "Door", "translation": "ประตู" },
+    { "word": "Small", "translation": "เล็ก" },
+    { "word": "Old", "translation": "เก่า" },
+    { "word": "House", "translation": "บ้าน" },
+    { "word": "Garden", "translation": "สวน" },
+    { "word": "Box", "translation": "กล่อง" },
+    { "word": "Open", "translation": "เปิด" },
+    { "word": "Inside", "translation": "ข้างใน" },
+    { "word": "Under", "translation": "ใต้" },
+    { "word": "Tree", "translation": "ต้นไม้" },
+    { "word": "Happy", "translation": "มีความสุข" },
+    { "word": "Look", "translation": "มองหา" },
+    { "word": "Secret", "translation": "ความลับ" },
+    { "word": "Gold", "translation": "ทอง" },
+    { "word": "Friend", "translation": "เพื่อน" },
+    { "word": "Help", "translation": "ช่วยเหลือ" },
+    { "word": "Beautiful", "translation": "สวยงาม" }
+  ],
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "title": "The Small Box",
+      "content": "Tom is at home. He lives in a small house. Today, he finds an old box. The box is beautiful, but it is closed. Tom wants to open the box. He looks for a key. \"Where is the key?\" he asks. The key is lost. He needs to find it.",
+      "image_url": "G:\\My Drive\\AI\\lang\\images\\ch1.png"
+    },
+    {
+      "chapter_number": 2,
+      "title": "Looking in the Garden",
+      "content": "Tom goes to the garden. The garden is big and green. He looks under a big tree. He looks inside the grass. He is looking for the small key. \"Is the key here?\" he asks. He cannot find the lost key. He is not happy. He looks at the old house again.",
+      "image_url": "G:\\My Drive\\AI\\lang\\images\\ch2.png"
+    },
+    {
+      "chapter_number": 3,
+      "title": "A Helping Friend",
+      "content": "Anna is Tom's friend. She comes to the house. \"Can I help you?\" Anna asks. Tom says, \"Yes, please. My key is lost. I want to open my old box.\" Anna and Tom look in the garden together. They look near the old door. They want to find the small key.",
+      "image_url": "G:\\My Drive\\AI\\lang\\images\\ch3.png"
+    },
+    {
+      "chapter_number": 4,
+      "title": "The Gold Key",
+      "content": "Anna looks under a small rock near the tree. \"Look!\" she says. She finds a small gold key. It is very beautiful. Tom is very happy. \"You find the lost key!\" he says. Now they can open the box. They go back into the house.",
+      "image_url": "G:\\My Drive\\AI\\lang\\images\\ch4.png"
+    },
+    {
+      "chapter_number": 5,
+      "title": "The Secret Inside",
+      "content": "Tom puts the gold key in the box. He can open it now. Inside the box, there is a secret. It is a small map of the garden. \"This is a beautiful secret,\" Anna says. Tom and his friend are very happy. They find the lost key and the secret.",
+      "image_url": "G:\\My Drive\\AI\\lang\\images\\ch5.png"
+    }
+  ]
+}
