@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practice Library - Elevate Your English</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase SDK Compat -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -129,6 +132,22 @@
             40% { transform: translateY(-15px) translateX(-50%); }
             60% { transform: translateY(-7px) translateX(-50%); }
         }
+        
+        /* Custom scrollbar for comments */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -240,6 +259,49 @@
             </div>
         </div>
 
+        <!-- Comments Section -->
+        <section id="comments-section" class="pt-10 pb-16 max-w-4xl mx-auto">
+            <div class="glass-panel rounded-[2rem] p-8 md:p-12 relative overflow-hidden">
+                <!-- Hover Glow Effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/5 via-purple-500/5 to-pink-500/5 opacity-50"></div>
+                
+                <div class="relative z-10">
+                    <h3 class="text-3xl font-black mb-2 text-white flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                        ส่งความคิดเห็น & ให้กำลังใจผู้สร้าง
+                    </h3>
+                    <p class="text-slate-400 text-sm mb-8">มาร่วมแบ่งปันความรู้สึกจากการอ่าน หรือพิมพ์ข้อความให้กำลังใจผู้พัฒนาได้ตรงนี้เลยครับ</p>
+
+                    <!-- Comment Form -->
+                    <form id="comment-form" class="space-y-4 mb-10">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="md:col-span-1">
+                                <label for="comment-name" class="block text-xs font-bold uppercase tracking-[0.1em] text-slate-400 mb-2">ชื่อของคุณ</label>
+                                <input type="text" id="comment-name" required placeholder="เช่น ครูสมชาย, นักเรียนชั้น ป.5" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors text-sm">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="comment-text" class="block text-xs font-bold uppercase tracking-[0.1em] text-slate-400 mb-2">ข้อความให้กำลังใจ</label>
+                                <input type="text" id="comment-text" required placeholder="พิมพ์ข้อความของคุณที่นี่..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors text-sm">
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn-modern px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full font-bold text-sm hover:scale-105 transition-transform shadow-[0_0_20px_rgba(99,102,241,0.3)]">
+                                ส่งความเห็น
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Comments List -->
+                    <div class="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar" id="comments-list">
+                        <!-- Placeholder loading state -->
+                        <div class="text-center py-8 text-slate-500 text-sm font-medium" id="comments-status">
+                            กำลังโหลดความคิดเห็น...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Premium Creator Credit -->
         <footer class="pb-20 max-w-4xl mx-auto">
             <div class="glass-panel rounded-[2rem] overflow-hidden relative group">
@@ -272,7 +334,12 @@
                                 CONTACT
                             </span>
                         </a>
-                        <p class="mt-4 text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">Premium AI System &copy; 2024</p>
+                        <!-- Visitor Counter -->
+                        <div class="mt-4 flex justify-center md:justify-end items-center gap-2 text-[10px] text-slate-400 font-bold tracking-widest uppercase">
+                            <span>Views:</span>
+                            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Ftonkillner-dot%2FPractice-Library&count_bg=%236366f1&title_bg=%231e1b4b&icon=&icon_color=%23E6E6E6&title=total&edge_flat=false" alt="Visitor Counter" class="h-5">
+                        </div>
+                        <p class="mt-2 text-[9px] text-slate-500 font-bold tracking-[0.2em] uppercase">Premium AI System &copy; 2024</p>
                     </div>
                 </div>
             </div>
@@ -330,6 +397,107 @@
         function selectLevel(level) {
             localStorage.setItem('selectedLevel', level);
             window.location.href = 'library.html';
+        }
+
+        // --- Firebase Comments Logic ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const commentsList = document.getElementById('comments-list');
+        const commentsStatus = document.getElementById('comments-status');
+
+        if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const database = firebase.database();
+            const commentsRef = database.ref('comments');
+
+            // Load comments
+            commentsRef.limitToLast(100).on('value', (snapshot) => {
+                commentsList.innerHTML = '';
+                const data = snapshot.val();
+                
+                if (data) {
+                    commentsStatus.style.display = 'none';
+                    // Convert to array and sort descending (newest first)
+                    const list = Object.keys(data).map(key => ({
+                        id: key,
+                        ...data[key]
+                    })).reverse();
+                    
+                    list.forEach(comment => {
+                        const dateStr = new Date(comment.timestamp).toLocaleString('th-TH', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        
+                        const commentDiv = document.createElement('div');
+                        commentDiv.className = 'bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col gap-2 transition-all hover:bg-white/[0.08]';
+                        commentDiv.innerHTML = `
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="font-bold text-indigo-300">${escapeHTML(comment.name)}</span>
+                                <span class="text-slate-500">${dateStr}</span>
+                            </div>
+                            <p class="text-sm text-slate-200">${escapeHTML(comment.text)}</p>
+                        `;
+                        commentsList.appendChild(commentDiv);
+                    });
+                } else {
+                    commentsStatus.style.display = 'block';
+                    commentsStatus.innerText = 'ยังไม่มีข้อความส่งกำลังใจ ร่วมพิมพ์ส่งคนแรกได้เลยครับ!';
+                }
+            });
+
+            // Submit comment
+            const form = document.getElementById('comment-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const nameInput = document.getElementById('comment-name');
+                const textInput = document.getElementById('comment-text');
+                
+                commentsRef.push({
+                    name: nameInput.value,
+                    text: textInput.value,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                });
+                
+                textInput.value = '';
+            });
+        } else {
+            // Show configuration instructions if config key is not yet set
+            commentsStatus.style.display = 'block';
+            commentsStatus.innerHTML = `
+                <div class="text-left p-6 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-indigo-200">
+                    <h5 class="font-bold mb-2 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        ระบบแสดงความคิดเห็นพร้อมติดตั้งแล้ว!
+                    </h5>
+                    <p class="text-xs leading-relaxed mb-4">ระบบกล่องคอมเมนต์ออกแบบและตกแต่งด้วยสไตล์กระจกเงาสีม่วงโปร่งแสงเรียบร้อยแล้ว โดยต้องการคีย์การเชื่อมต่อจากฐานข้อมูล Google Firebase ในคอมพิวเตอร์ของคุณเพื่อเริ่มเก็บบันทึกข้อมูลความเห็น สามารถเปิดดูวิธีการสมัครสร้างฐานข้อมูลฟรีและนำคีย์มาใส่ได้ในคู่มือแนะนำของระบบครับ</p>
+                </div>
+            `;
+        }
+
+        // Helper to escape HTML characters
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
         }
     </script>
 </body>
